@@ -1,0 +1,50 @@
+#!/bin/zsh
+
+# Common
+open /Applications/Dropbox.app
+open /Applications/TogglDesktop.app
+open '/Applications/Gmail Notifier.app'
+open /Applications/Todoist.app
+
+if [[ "$1" == 'work' ]]; then
+	# Desktop 1
+	open /Applications/PyCharm.app
+	open '/Applications/Mia for Gmail.app'
+	open /Applications/Skype.app
+	open /Applications/Slack.app
+
+	# Desktop 2
+	open /Applications/Spotify.app
+	open '/Applications/Spotify Notifications.app'
+	open /Applications/Telegram.app
+	open /Applications/BeardedSpice.app
+
+	# https://docs.docker.com/installation/mac/
+	echo 'Starting Docker VM'
+	cd ~/eatfirst/cave
+	docker-compose up -d
+
+	defaultbrowser -set opera
+	exit
+fi
+
+if [[ "$1" == 'home' ]]; then
+	echo 'Killing work apps'
+	pkill pycharm
+	pkill 'Mia for Gmail'
+	pkill Opera
+	pkill Skype
+	pkill -9 Slack
+	pkill -9 Spotify
+	pkill Telegram
+	pkill BeardedSpice
+
+	echo 'Stopping Cave containers'
+	cd ~/eatfirst/cave
+	docker-compose stop
+
+	defaultbrowser -set brave
+	exit
+fi
+
+echo 'Work or home?'
