@@ -24,7 +24,7 @@ if [[ "$1" == 'work' ]]; then
 	cd ~/eatfirst/cave
 	docker-compose up -d
 
-	defaultbrowser -set opera
+	defaultbrowser -set firefox
 	exit
 fi
 
