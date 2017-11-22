@@ -23,6 +23,8 @@ if [[ "$1" == 'work' ]]; then
 	echo 'Starting Docker VM'
 	cd ~/eatfirst/cave
 	docker-compose up -d
+	cd ~/eatfirst/lydia
+	docker-compose up -d
 
 	defaultbrowser -set firefox
 	exit
@@ -32,7 +34,7 @@ if [[ "$1" == 'home' ]]; then
 	echo 'Killing work apps'
 	pkill pycharm
 	pkill 'Mia for Gmail'
-	pkill Opera
+	pkill firefox
 	pkill Skype
 	pkill -9 Slack
 	pkill -9 Spotify
@@ -41,6 +43,8 @@ if [[ "$1" == 'home' ]]; then
 
 	echo 'Stopping Cave containers'
 	cd ~/eatfirst/cave
+	docker-compose stop
+	cd ~/eatfirst/lydia
 	docker-compose stop
 
 	defaultbrowser -set brave
