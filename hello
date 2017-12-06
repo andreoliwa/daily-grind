@@ -47,7 +47,7 @@ if [[ "$1" == 'home' ]]; then
 	cd ~/eatfirst/lydia
 	docker-compose stop
 
-	defaultbrowser -set brave
+	defaultbrowser -set vivaldi
 	exit
 fi
 
