@@ -6,7 +6,13 @@ open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
 open /Applications/Todoist.app
 
+# Activity Watch
+cd ~
+test -z $(pidof aw-qt) && nohup ~/activitywatch/aw-qt &
+
 if [[ "$1" == 'work' ]]; then
+	defaultbrowser -set firefox
+
 	# Desktop 1
 	open /Applications/PyCharm.app
 	open '/Applications/Mia for Gmail.app'
@@ -26,11 +32,12 @@ if [[ "$1" == 'work' ]]; then
 	cd ~/eatfirst/lydia
 	docker-compose up -d
 
-	defaultbrowser -set firefox
 	exit
 fi
 
 if [[ "$1" == 'home' ]]; then
+	defaultbrowser -set vivaldi
+
 	echo 'Killing work apps'
 	pkill pycharm
 	pkill 'Mia for Gmail'
@@ -47,7 +54,6 @@ if [[ "$1" == 'home' ]]; then
 	cd ~/eatfirst/lydia
 	docker-compose stop
 
-	defaultbrowser -set vivaldi
 	exit
 fi
 
