@@ -4,7 +4,6 @@
 open /Applications/Dropbox.app
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
-open /Applications/Todoist.app
 
 # Activity Watch
 cd ~
