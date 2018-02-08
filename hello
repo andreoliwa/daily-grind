@@ -16,7 +16,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/PyCharm.app
 	open '/Applications/Mia for Gmail.app'
 	open /Applications/Skype.app
-	open /Applications/Slack.app
+	open /Applications/Twist.app
 
 	# Desktop 2
 	open /Applications/Spotify.app
@@ -42,8 +42,8 @@ if [[ "$1" == 'home' ]]; then
 	pkill 'Mia for Gmail'
 	pkill firefox
 	pkill Skype
-	pkill -9 Slack
-	pkill -9 Spotify
+	pkill Twist
+	pkill Spotify
 	pkill Telegram
 	pkill BeardedSpice
 
