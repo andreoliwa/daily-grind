@@ -15,6 +15,7 @@ if [[ "$1" == 'work' ]]; then
 	# Desktop 1
 	open /Applications/PyCharm.app
 	open '/Applications/Mia for Gmail.app'
+	open /Applications/Firefox.app
 	open /Applications/Skype.app
 	open /Applications/Twist.app
 
