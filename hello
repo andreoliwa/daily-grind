@@ -1,12 +1,13 @@
 #!/bin/zsh
 
+LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
+
 # Common
 open /Applications/Dropbox.app
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
 
 # Activity Watch
-cd ~
 test -z $(pidof aw-qt) && nohup ~/activitywatch/aw-qt &
 
 if [[ "$1" == 'work' ]]; then
@@ -25,17 +26,17 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/Telegram.app
 	open /Applications/BeardedSpice.app
 
-	# https://docs.docker.com/installation/mac/
-	echo 'Starting Docker VM'
-	cd ~/eatfirst/cave
-	docker-compose up -d
-	cd ~/eatfirst/lydia
-	docker-compose up -d
+	if [ -f $LAST_WORKING_DIR ]; then
+		echo 'Starting Docker VM'
+		cd $(cat $LAST_WORKING_DIR)
+		docker-compose up -d
+	fi
 
 	exit
 fi
 
 if [[ "$1" == 'home' ]]; then
+	pwd >$LAST_WORKING_DIR 
 	defaultbrowser -set vivaldi
 
 	echo 'Killing work apps'
@@ -48,11 +49,8 @@ if [[ "$1" == 'home' ]]; then
 	pkill Telegram
 	pkill BeardedSpice
 
-	echo 'Stopping Cave containers'
-	cd ~/eatfirst/cave
-	docker-compose stop
-	cd ~/eatfirst/lydia
-	docker-compose stop
+	echo 'Stopping EatFirst containers'
+	find ~/eatfirst -name docker-compose.yml -exec docker-compose -f {} stop \;
 
 	exit
 fi
