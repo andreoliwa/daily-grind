@@ -6,13 +6,12 @@ LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 open /Applications/Dropbox.app
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
+defaultbrowser -set vivaldi
 
 # Activity Watch
 test -z $(pidof aw-qt) && nohup ~/activitywatch/aw-qt &
 
 if [[ "$1" == 'work' ]]; then
-	defaultbrowser -set firefox
-
 	# Desktop 1
 	open /Applications/PyCharm.app
 	open '/Applications/Mia for Gmail.app'
@@ -25,11 +24,12 @@ if [[ "$1" == 'work' ]]; then
 	open '/Applications/Spotify Notifications.app'
 	open /Applications/Telegram.app
 	open /Applications/BeardedSpice.app
+	open /Applications/WhatsApp.app
 
 	if [ -f $LAST_WORKING_DIR ]; then
 		echo 'Starting Docker VM'
 		cd $(cat $LAST_WORKING_DIR)
-		docker-compose up -d
+		docker-compose up cave -d
 	fi
 
 	exit
@@ -37,7 +37,6 @@ fi
 
 if [[ "$1" == 'home' ]]; then
 	pwd >$LAST_WORKING_DIR 
-	defaultbrowser -set vivaldi
 
 	echo 'Killing work apps'
 	pkill pycharm
@@ -48,6 +47,7 @@ if [[ "$1" == 'home' ]]; then
 	pkill Spotify
 	pkill Telegram
 	pkill BeardedSpice
+	pkill WhatsApp
 
 	echo 'Stopping EatFirst containers'
 	find ~/eatfirst -name docker-compose.yml -exec docker-compose -f {} stop \;
