@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 
