@@ -18,6 +18,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/Firefox.app
 	open /Applications/Skype.app
 	open /Applications/Twist.app
+	open /Applications/Zulip.app
 
 	# Desktop 2
 	open /Applications/Spotify.app
@@ -48,6 +49,7 @@ if [[ "$1" == 'home' ]]; then
 	pkill Telegram
 	pkill BeardedSpice
 	pkill WhatsApp
+	pkill Zulip
 
 	echo 'Stopping EatFirst containers'
 	find ~/eatfirst -name docker-compose.yml -exec docker-compose -f {} stop \;
