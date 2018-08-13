@@ -6,7 +6,7 @@ LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 open /Applications/Dropbox.app
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
-defaultbrowser -set vivaldi
+defaultbrowser -set choosy
 
 # Activity Watch
 test -z $(pidof aw-qt) && nohup ~/activitywatch/aw-qt &
