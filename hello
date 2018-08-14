@@ -17,7 +17,6 @@ if [[ "$1" == 'work' ]]; then
 	open '/Applications/Mia for Gmail.app'
 	open /Applications/Firefox.app
 	open /Applications/Skype.app
-	open /Applications/Twist.app
 	open /Applications/Zulip.app
 
 	# Desktop 2
