@@ -14,6 +14,7 @@ test -z $(pidof aw-qt) && nohup ~/activitywatch/aw-qt &
 if [[ "$1" == 'work' ]]; then
 	# Desktop 1
 	open /Applications/PyCharm.app
+	open '/Applications/Visual Studio Code.app/'
 	open '/Applications/Mia for Gmail.app'
 	open /Applications/Firefox.app
 	open /Applications/Skype.app
