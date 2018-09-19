@@ -9,7 +9,7 @@ open '/Applications/Gmail Notifier.app'
 defaultbrowser -set choosy
 
 # Activity Watch
-test -z $(pidof aw-qt) && nohup ~/activitywatch/aw-qt &
+test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
 
 if [[ "$1" == 'work' ]]; then
 	# Desktop 1
@@ -37,7 +37,7 @@ if [[ "$1" == 'work' ]]; then
 fi
 
 if [[ "$1" == 'home' ]]; then
-	pwd >$LAST_WORKING_DIR 
+	pwd >$LAST_WORKING_DIR
 
 	echo 'Killing work apps'
 	pkill pycharm
