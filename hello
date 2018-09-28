@@ -6,10 +6,10 @@ LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 open /Applications/Dropbox.app
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
-defaultbrowser -set choosy
+defaultbrowser -set browserosaurus
 
 # Activity Watch
-test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
+# test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
 
 if [[ "$1" == 'work' ]]; then
 	# Desktop 1
