@@ -6,7 +6,6 @@ LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 open /Applications/Dropbox.app
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
-defaultbrowser -set browserosaurus
 
 # Activity Watch
 # test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
