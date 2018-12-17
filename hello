@@ -16,7 +16,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/PyCharm.app
 	open '/Applications/Visual Studio Code.app/'
 	open '/Applications/Mia for Gmail.app'
-	open /Applications/Firefox.app
+	open '/Applications/Brave Browser.app/'
 	open /Applications/Skype.app
 	open /Applications/Zulip.app
 
@@ -42,7 +42,7 @@ if [[ "$1" == 'home' ]]; then
 	echo 'Killing work apps'
 	pkill pycharm
 	pkill 'Mia for Gmail'
-	pkill firefox
+	pkill Brave
 	pkill Skype
 	pkill Twist
 	pkill Spotify
