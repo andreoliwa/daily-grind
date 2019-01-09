@@ -3,6 +3,7 @@
 LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 
 # Common
+open '/Applications/Brave Browser.app/'
 open /Applications/Dropbox.app
 pkill TogglDesktop  # The beta version needs a restart to be able to sync again
 open /Applications/TogglDesktop.app
@@ -16,7 +17,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/PyCharm.app
 	open '/Applications/Visual Studio Code.app/'
 	open '/Applications/Mia for Gmail.app'
-	open '/Applications/Brave Browser.app/'
+	open /Applications/Vivaldi.app/
 	open /Applications/Skype.app
 	open /Applications/Zulip.app
 
@@ -42,7 +43,7 @@ if [[ "$1" == 'home' ]]; then
 	echo 'Killing work apps'
 	pkill pycharm
 	pkill 'Mia for Gmail'
-	pkill Brave
+	pkill Vivaldi
 	pkill Skype
 	pkill Twist
 	pkill Spotify
