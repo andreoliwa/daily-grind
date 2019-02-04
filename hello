@@ -31,7 +31,8 @@ if [[ "$1" == 'work' ]]; then
 	if [ -f $LAST_WORKING_DIR ]; then
 		echo 'Starting Docker VM'
 		cd $(cat $LAST_WORKING_DIR)
-		docker-find yml cave/do up -d cave
+        docker-find yml cave/do stop
+		# docker-find yml cave/do up -d cave
 	fi
 
 	exit
@@ -54,6 +55,7 @@ if [[ "$1" == 'home' ]]; then
 
 	echo 'Stopping EatFirst containers'
     docker-find yml cave/do stop
+    docker-find yml lydia stop
 
 	echo 'Stopping cli/run-parallel-tests.py containers'
     docker ps -a | rg cave- | awk '{print $1}' | xargs docker rm --force
