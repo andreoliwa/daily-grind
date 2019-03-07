@@ -2,6 +2,10 @@
 
 LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 
+# Close the browser to force LastPass logout
+pkill Brave
+sleep 1
+
 # Common
 open '/Applications/Brave Browser.app/'
 open /Applications/Dropbox.app
@@ -43,6 +47,7 @@ if [[ "$1" == 'home' ]]; then
 
 	echo 'Killing work apps'
 	pkill pycharm
+	pkill Electron  # Visual Studio Code
 	pkill 'Mia for Gmail'
 	pkill Vivaldi
 	pkill Skype
