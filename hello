@@ -16,6 +16,9 @@ open '/Applications/Gmail Notifier.app'
 # Activity Watch
 # test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
 
+# Kill ScanSnap
+ps aux | rg scansnap | awk '{print $2}' | xargs kill
+
 if [[ "$1" == 'work' ]]; then
 	# Desktop 1
 	open /Applications/PyCharm.app
@@ -31,6 +34,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/Telegram.app
 	open /Applications/BeardedSpice.app
 	open /Applications/WhatsApp.app
+    open /Applications/Signal.app/
 
 	if [ -f $LAST_WORKING_DIR ]; then
 		echo 'Starting Docker VM'
@@ -57,6 +61,12 @@ if [[ "$1" == 'home' ]]; then
 	pkill BeardedSpice
 	pkill WhatsApp
 	pkill Zulip
+
+    # Kill Signal twice because it's die hard
+	sleep .5
+    ps aux | rg signal | awk '{print $2}' | xargs kill
+	sleep .5
+    ps aux | rg signal | awk '{print $2}' | xargs kill
 
 	echo 'Stopping EatFirst containers'
     docker-find yml cave/do stop
