@@ -11,7 +11,7 @@ sleep 1
 open /Applications/Dropbox.app
 pkill TogglDesktop  # The beta version needs a restart to be able to sync again
 open /Applications/TogglDesktop.app
-open '/Applications/Gmail Notifier.app'
+# open '/Applications/Gmail Notifier.app'
 
 # Activity Watch
 # test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
@@ -24,9 +24,10 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/PyCharm.app
 	open '/Applications/Visual Studio Code.app/'
 	open '/Applications/Mia for Gmail.app'
-	open /Applications/Vivaldi.app/
+	open /Applications/Vivaldi.app
 	open /Applications/Skype.app
 	open /Applications/Zulip.app
+    open /Applications/Trello.app
 
 	# Desktop 2
 	open /Applications/Spotify.app
@@ -34,7 +35,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/Telegram.app
 	open /Applications/BeardedSpice.app
 	open /Applications/WhatsApp.app
-    open /Applications/Signal.app/
+    open /Applications/Signal.app
 
 	if [ -f $LAST_WORKING_DIR ]; then
 		echo 'Starting Docker VM'
@@ -61,6 +62,7 @@ if [[ "$1" == 'home' ]]; then
 	pkill BeardedSpice
 	pkill WhatsApp
 	pkill Zulip
+    pkill Trello
 
     # Kill Signal twice because it's die hard
 	sleep .5
