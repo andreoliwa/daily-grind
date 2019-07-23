@@ -11,7 +11,7 @@ sleep 1
 open /Applications/Dropbox.app
 pkill TogglDesktop  # The beta version needs a restart to be able to sync again
 open /Applications/TogglDesktop.app
-# open '/Applications/Gmail Notifier.app'
+open '/Applications/Gmail Notifier.app'
 
 # Activity Watch
 # test -z $(pidof aw-qt) && cd && nohup ~/activitywatch/aw-qt &
