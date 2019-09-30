@@ -27,7 +27,7 @@ if [[ "$1" == 'work' ]]; then
 	open /Applications/Vivaldi.app
 	open /Applications/Skype.app
 	open /Applications/Zulip.app
-    open /Applications/Trello.app
+    # open /Applications/Trello.app
 
 	# Desktop 2
 	open /Applications/Spotify.app
