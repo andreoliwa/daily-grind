@@ -8,7 +8,7 @@ sleep 1
 
 # Common
 # open '/Applications/Brave Browser.app/'
-open /Applications/Dropbox.app
+# open /Applications/Dropbox.app
 pkill TogglDesktop  # The beta version needs a restart to be able to sync again
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
