@@ -26,8 +26,8 @@ if [[ "$1" == 'work' ]]; then
 	open '/Applications/Mia for Gmail.app'
 	open /Applications/Vivaldi.app
 	open /Applications/Skype.app
+    open /Applications/Slack.app
 	open /Applications/Zulip.app
-    # open /Applications/Trello.app
 
 	# Desktop 2
 	open /Applications/Spotify.app
@@ -62,6 +62,7 @@ if [[ "$1" == 'home' ]]; then
 	pkill BeardedSpice
 	pkill WhatsApp
 	pkill Zulip
+    pkill Slack
     pkill Trello
 
     # Kill Signal twice because it's die hard
