@@ -4,12 +4,11 @@ LAST_WORKING_DIR=~/.config/clitoolkit/last_working_dir
 
 # Close the browser to force LastPass logout
 pkill Brave
-sleep 1
+pkill TogglDesktop  # The beta version needs a restart to be able to sync again
+sleep 2
 
 # Common
-# open '/Applications/Brave Browser.app/'
-# open /Applications/Dropbox.app
-pkill TogglDesktop  # The beta version needs a restart to be able to sync again
+open '/Applications/Brave Browser.app/'
 open /Applications/TogglDesktop.app
 open '/Applications/Gmail Notifier.app'
 
