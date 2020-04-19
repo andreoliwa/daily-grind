@@ -20,7 +20,6 @@ ps aux | rg scansnap | awk '{print $2}' | xargs kill
 
 if [[ "$1" == 'work' ]]; then
 	# Desktop 1
-	# open /Applications/PyCharm.app
 	open '/Applications/Visual Studio Code.app/'
 	open '/Applications/Mia for Gmail.app'
 	open /Applications/Vivaldi.app
