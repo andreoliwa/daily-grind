@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-cd ~/dotfiles_private
+cd ~/Code/toolbox
 poetry run hello $*
