@@ -122,11 +122,14 @@ RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
 PrivateInternetAccess = App("Private Internet Access")
 Slack = App("Slack")
+Hammerspoon = App("Hammerspoon")
 
 GROUPS = {
     "off": Action("Turn off all apps and go to sleep", turn_off, App.ALL_APPS),
     "background": Action(
-        "Background apps", turn_on, [Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, MiaForGmail, TogglDesktop],
+        "Background apps",
+        turn_on,
+        [Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, MiaForGmail, TogglDesktop, Hammerspoon],
     ),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharmCE]),
