@@ -106,7 +106,7 @@ BraveBrowser = App("Brave Browser")
 BraveBrowserDev = App("Brave Browser Dev")
 Skype = App("Skype")
 TogglDesktop = App("TogglDesktop")
-PyCharmCE = App("PyCharm CE", pkill="pycharm")
+PyCharm = App("PyCharm", pkill="pycharm")
 Zoom = App("zoom.us")
 
 # Scan Snap has some background processes
@@ -132,10 +132,10 @@ GROUPS = {
         [Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, MiaForGmail, TogglDesktop, Hammerspoon],
     ),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
-    "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharmCE]),
+    "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNotifications, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
-    "sennder": Action("Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack]),
+    "sennder": Action("Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm]),
 }
 
 
