@@ -12,18 +12,25 @@ from clib.ui import failure, success
 
 
 class App:
-    """A desktop application."""
+    """A desktop application or a command-line script."""
 
     ALL_APPS: Set[App] = set()
     ALL_NAMES: Dict[str, App] = {}
 
     dry_run = False
 
-    def __init__(self, name: str, pkill: str = None, kill_commands: List[str] = None) -> None:
+    def __init__(
+        self, name: str, *, pkill: str = None, kill_commands: List[str] = None, cli=False, background=False
+    ) -> None:
         self.name = name
-        self.path = Path(f"/Applications/{name}.app")
+        self.cli = cli
+        if cli:
+            self.path = Path(shell(f"which {name}", return_lines=True)[0])
+        else:
+            self.path = Path(f"/Applications/{name}.app")
         self.pkill = pkill
         self.kill_commands = kill_commands or []
+        self.background = background
 
         self.ALL_APPS.add(self)
         self.ALL_NAMES[name] = self
@@ -35,7 +42,11 @@ class App:
     def on(self):
         """Open the app."""
         func = print if self.dry_run else shell
-        func(f"open '{self.path}'")
+        if self.cli:
+            back = " &" if self.background else ""
+            func(f"'{self.path}'{back}")
+        else:
+            func(f"open '{self.path}'")
 
     def off(self):
         """Close/kill the app."""
@@ -45,6 +56,10 @@ class App:
                 func(command)
         else:
             func(f"pkill '{self.pkill or self.name}'")
+
+
+class Script(App):
+    """A command-line script."""
 
 
 ActionFunction = Callable[[Iterable[App]], None]
@@ -116,7 +131,7 @@ Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-MiaForGmail = App("Mia for Gmail")
+DontForget = App("dontforget", cli=True, background=True)
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
@@ -129,7 +144,7 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        [Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, MiaForGmail, TogglDesktop, Hammerspoon],
+        [Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, DontForget, TogglDesktop, Hammerspoon],
     ),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
