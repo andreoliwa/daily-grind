@@ -131,7 +131,12 @@ Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-DontForget = App("dontforget", cli=True, background=True)
+DontForget = App(
+    "dontforget",
+    cli=True,
+    background=True,
+    kill_commands=["ps aux | rg dontforget | rg -v 'rg dont' | awk '{print $2}' | xargs kill"],
+)
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
@@ -156,13 +161,14 @@ GROUPS = {
 
 @click.command()
 @dry_run_option
-@click.option("--list", "-l", "list_", is_flag=True, default=False, help="List the available groups")
+@click.option("--list", "-l", "show_list", is_flag=True, default=False, help="List the available groups")
+@click.option("--off", "-x", is_flag=True, default=False, help="Turn off the apps instead of opening")
 @click.argument("group_or_app", nargs=-1, required=False)
-def main(dry_run: bool, list_, group_or_app: Tuple[str]):
+def main(dry_run: bool, show_list: bool, off: bool, group_or_app: Tuple[str]) -> None:
     """Start and stop apps in groups, processed in the order they were informed."""
     App.dry_run = dry_run
 
-    if list_ or not group_or_app:
+    if show_list or not group_or_app:
         success("Groups:")
         max_len = max(len(key) for key in GROUPS)
         for key, action in GROUPS.items():
@@ -183,16 +189,17 @@ def main(dry_run: bool, list_, group_or_app: Tuple[str]):
 
         if chosen_group:
             action = GROUPS[chosen_group]
-            success(f"Group: {chosen_group} / Action: {action.function}")
+            desired_function = turn_off if off else action.function
+            success(f"Group: {chosen_group} / Action: {desired_function}")
             names = []
             for app in get_recursive_apps(chosen_group):
-                app_mapping[app] = action.function
+                app_mapping[app] = desired_function
                 names.append(app.name)
             click.echo("  " + ", ".join(names))
         elif chosen_app:
             # If an app was informed, we assume it should be open
             app = App.ALL_NAMES[chosen_app]
-            app_mapping[app] = turn_on
+            app_mapping[app] = turn_off if off else turn_on
 
     # Group by function again
     function_mapping: Dict[ActionFunction, List[App]] = defaultdict(list)
