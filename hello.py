@@ -20,15 +20,23 @@ class App:
     dry_run = False
 
     def __init__(
-        self, name: str, *, pkill: str = None, kill_commands: List[str] = None, cli=False, background=False
+        self,
+        name: str,
+        *,
+        pkill: str = None,
+        open_commands: List[str] = None,
+        kill_commands: List[str] = None,
+        cli=False,
+        background=False,
     ) -> None:
         self.name = name
         self.cli = cli
         if cli:
-            self.path = Path(shell(f"which {name}", return_lines=True)[0])
+            self.path = Path(shell(f"which {name}", return_lines=True, quiet=True)[0])
         else:
             self.path = Path(f"/Applications/{name}.app")
         self.pkill = pkill
+        self.open_commands = open_commands or []
         self.kill_commands = kill_commands or []
         self.background = background
 
@@ -42,6 +50,10 @@ class App:
     def on(self):
         """Open the app."""
         func = print if self.dry_run else shell
+        if self.open_commands:
+            for command in self.open_commands:
+                func(command)
+            return
         if self.cli:
             back = " &" if self.background else ""
             func(f"'{self.path}'{back}")
@@ -143,13 +155,14 @@ BeardedSpice = App("BeardedSpice")
 PrivateInternetAccess = App("Private Internet Access")
 Slack = App("Slack")
 Hammerspoon = App("Hammerspoon")
+Bluetooth = App("blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"])
 
 GROUPS = {
     "off": Action("Turn off all apps and go to sleep", turn_off, App.ALL_APPS),
     "background": Action(
         "Background apps",
         turn_on,
-        [Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, DontForget, TogglDesktop, Hammerspoon],
+        [Bluetooth, Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, DontForget, TogglDesktop, Hammerspoon],
     ),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
