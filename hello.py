@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, NamedTuple, Set, Tuple, Union
+from typing import Callable, Dict, Iterable, List, NamedTuple, Set, Tuple, Union, Optional
 
 import click
 from clib import dry_run_option
@@ -14,8 +14,8 @@ from clib.ui import failure, success
 class App:
     """A desktop application or a command-line script."""
 
-    ALL_APPS: Set[App] = set()
     ALL_NAMES: Dict[str, App] = {}
+    collection: Dict[Optional[str], Set[App]] = defaultdict(set)
 
     dry_run = False
 
@@ -28,6 +28,7 @@ class App:
         kill_commands: List[str] = None,
         cli=False,
         background=False,
+        collection_key: str = None,
     ) -> None:
         self.name = name
         self.cli = cli
@@ -40,8 +41,8 @@ class App:
         self.kill_commands = kill_commands or []
         self.background = background
 
-        self.ALL_APPS.add(self)
         self.ALL_NAMES[name] = self
+        self.collection[collection_key].add(self)
 
     def __repr__(self):
         """String representation."""
@@ -155,10 +156,15 @@ BeardedSpice = App("BeardedSpice")
 PrivateInternetAccess = App("Private Internet Access")
 Slack = App("Slack")
 Hammerspoon = App("Hammerspoon")
-Bluetooth = App("blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"])
+Bluetooth = App(
+    "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
+)
 
 GROUPS = {
-    "off": Action("Turn off all apps and go to sleep", turn_off, App.ALL_APPS),
+    "off": Action("Turn off all apps and go to sleep", turn_off, App.collection[None]),
+    "switch": Action(
+        "Turn off all apps before switching laptops", turn_off, App.collection[None] | App.collection["switch"]
+    ),
     "background": Action(
         "Background apps",
         turn_on,
