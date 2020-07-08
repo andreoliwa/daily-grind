@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, NamedTuple, Set, Tuple, Union, Optional
+from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Set, Tuple, Union
 
 import click
 from clib import dry_run_option
@@ -174,7 +174,7 @@ GROUPS = {
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
-    "sennder": Action("Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm]),
+    "sennder": Action("Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram]),
 }
 
 
