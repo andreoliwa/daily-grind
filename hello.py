@@ -122,7 +122,7 @@ def get_recursive_apps(group: str, seen: Set = None) -> List[App]:
 
 
 Spotify = App("Spotify")
-SpotifyNotifications = App("Spotify Notifications")
+SpotifyNowPlaying = App("Spotify - now playing")
 Telegram = App("Telegram")
 WhatsApp = App("WhatsApp")
 
@@ -172,7 +172,7 @@ GROUPS = {
     ),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
-    "music": Action("Listen to music", turn_on, [Spotify, SpotifyNotifications, BeardedSpice]),
+    "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
     "sennder": Action("Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm]),
 }
