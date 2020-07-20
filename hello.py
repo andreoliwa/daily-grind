@@ -168,8 +168,9 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        [Bluetooth, Finicky, Docker, OneDrive, KeepingYouAwake, RescueTime, DontForget, TogglDesktop, Hammerspoon],
+        [Bluetooth, OneDrive, Finicky, KeepingYouAwake, RescueTime, TogglDesktop, Hammerspoon, Docker, DontForget],
     ),
+    "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon],),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
