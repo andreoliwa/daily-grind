@@ -170,12 +170,15 @@ GROUPS = {
         turn_on,
         [Bluetooth, OneDrive, Finicky, KeepingYouAwake, RescueTime, TogglDesktop, Hammerspoon, Docker, DontForget],
     ),
-    "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon],),
+    "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
     "sennder": Action("Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram]),
+    "famiglia": Action(
+        "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglDesktop, Skype, WhatsApp]
+    ),
 }
 
 
