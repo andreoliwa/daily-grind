@@ -121,6 +121,16 @@ def get_recursive_apps(group: str, seen: Set = None) -> List[App]:
     return found_apps
 
 
+def ps_aux_kill(app_partial_name: str, *, exclude: List[str] = None, sudo: bool = False):
+    """Return a command to run ps aux on a string and kill the processes."""
+    sudo_str = "sudo " if sudo else ""
+    exclude_str = "".join(f" | rg -v {item}" for item in exclude or [])
+    return (
+        f"ps aux | rg {app_partial_name} | rg -v 'rg {app_partial_name}'{exclude_str}"
+        + f" | awk '{{print $2}}' | {sudo_str}xargs kill"
+    )
+
+
 Spotify = App("Spotify")
 SpotifyNowPlaying = App("Spotify - now playing")
 Telegram = App("Telegram")
@@ -138,18 +148,13 @@ PyCharm = App("PyCharm", pkill="pycharm")
 Zoom = App("zoom.us")
 
 # Scan Snap has some background processes
-ScanSnapHome = App("ScanSnapHomeMain", kill_commands=["ps aux | rg scansnap | awk '{print $2}' | xargs kill"])
+ScanSnapHome = App("ScanSnapHomeMain", kill_commands=[ps_aux_kill("scansnap")])
 
 Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-DontForget = App(
-    "dontforget",
-    cli=True,
-    background=True,
-    kill_commands=["ps aux | rg dontforget | rg -v 'rg dont' | awk '{print $2}' | xargs kill"],
-)
+DontForget = App("dontforget", cli=True, background=True, kill_commands=[ps_aux_kill("dontforget")],)
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
@@ -159,6 +164,8 @@ Hammerspoon = App("Hammerspoon")
 Bluetooth = App(
     "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
 )
+Pritunl = App("Pritunl", kill_commands=[ps_aux_kill("pritunl", exclude=["pritunl-service"], sudo=True)])
+
 
 GROUPS = {
     "off": Action("Turn off all apps and go to sleep", turn_off, App.collection[None]),
