@@ -146,7 +146,7 @@ VisualStudioCode = App("Visual Studio Code", pkill="Electron")
 BraveBrowser = App("Brave Browser")
 BraveBrowserDev = App("Brave Browser Dev")
 Skype = App("Skype")
-TogglDesktop = App("TogglDesktop")
+TogglTrack = App("Toggl Track")
 PyCharm = App("PyCharm", pkill="pycharm")
 Zoom = App("zoom.us")
 
@@ -157,7 +157,12 @@ Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-DontForget = App("dontforget", cli=True, background=True, kill_commands=[ps_aux_kill("dontforget")],)
+DontForget = App(
+    "dontforget",
+    cli=True,
+    background=True,
+    kill_commands=[ps_aux_kill("dontforget")],
+)
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
@@ -178,18 +183,18 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        [Bluetooth, OneDrive, Finicky, KeepingYouAwake, RescueTime, TogglDesktop, Hammerspoon, Docker, DontForget],
+        [Bluetooth, OneDrive, Finicky, KeepingYouAwake, RescueTime, TogglTrack, Hammerspoon, Docker, DontForget],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
-    "dev": Action("Development", turn_on, [TogglDesktop, Docker, "web", VisualStudioCode, PyCharm]),
+    "dev": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
     "sennder": Action(
         "Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal]
     ),
     "famiglia": Action(
-        "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglDesktop, Skype, WhatsApp]
+        "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
     ),
 }
 
