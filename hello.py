@@ -122,13 +122,16 @@ def get_recursive_apps(group: str, seen: Set = None) -> List[App]:
 
 
 def ps_aux_kill(app_partial_name: str, *, exclude: List[str] = None, sudo: bool = False):
-    """Return a command to run ps aux on a string and kill the processes."""
-    sudo_str = "sudo " if sudo else ""
+    """Return a command to run ps aux on a string and kill the processes.
+
+    Only ask for ``sudo`` password when needeed:
+    check if there are PIDs first, then run the ``sudo kill`` command if there are PIDs.
+    """
     exclude_str = "".join(f" | rg -v {item}" for item in exclude or [])
-    return (
-        f"ps aux | rg {app_partial_name} | rg -v 'rg {app_partial_name}'{exclude_str}"
-        + f" | awk '{{print $2}}' | {sudo_str}xargs kill"
-    )
+    list_pids = f"ps aux | rg {app_partial_name} | rg -v 'rg {app_partial_name}'{exclude_str} | awk '{{print $2}}'"
+    if sudo:
+        return f'test -n "$({list_pids})" && {list_pids} | sudo xargs kill'
+    return f"{list_pids} | xargs kill"
 
 
 Spotify = App("Spotify")
