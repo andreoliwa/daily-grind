@@ -136,7 +136,7 @@ def ps_aux_kill(app_partial_name: str, *, exclude: List[str] = None, sudo: bool 
 
 Spotify = App("Spotify")
 SpotifyNowPlaying = App("Spotify - now playing")
-Telegram = App("Telegram")
+Telegram = App("Telegram", kill_commands=["pkill -9 Telegram"])
 WhatsApp = App("WhatsApp")
 
 # Kill Signal twice because it's die hard
@@ -157,7 +157,7 @@ Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-DontForget = App("dontforget", cli=True, background=True, kill_commands=[ps_aux_kill("dontforget")],)
+DontForget = App("dontforget", cli=True, background=True, kill_commands=[ps_aux_kill("dontforget")])
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
