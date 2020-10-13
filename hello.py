@@ -168,6 +168,7 @@ Bluetooth = App(
     "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
 )
 Pritunl = App("Pritunl", kill_commands=[ps_aux_kill("pritunl", exclude=["pritunl-service"], sudo=True)])
+Todoist = App("Todoist")
 
 
 GROUPS = {
@@ -178,7 +179,18 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        [Bluetooth, OneDrive, Finicky, KeepingYouAwake, RescueTime, TogglTrack, Hammerspoon, Docker, DontForget],
+        [
+            Bluetooth,
+            OneDrive,
+            Finicky,
+            KeepingYouAwake,
+            Todoist,
+            RescueTime,
+            TogglTrack,
+            Hammerspoon,
+            Docker,
+            DontForget,
+        ],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
