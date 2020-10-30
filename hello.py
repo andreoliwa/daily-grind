@@ -169,6 +169,9 @@ Bluetooth = App(
 )
 Pritunl = App("Pritunl", kill_commands=[ps_aux_kill("pritunl", exclude=["pritunl-service"], sudo=True)])
 Todoist = App("Todoist")
+Bitwarden = App("Bitwarden")
+VLC = App("VLC")
+XQuartz = App("XQuartz", kill_commands=["pkill -9 launchd_startx"])
 
 
 GROUPS = {
