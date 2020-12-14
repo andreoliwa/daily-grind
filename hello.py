@@ -33,7 +33,10 @@ class App:
         self.name = name
         self.cli = cli
         if cli:
-            self.path = Path(shell(f"which {name}", return_lines=True, quiet=True)[0])
+            which_results = shell(f"which {name}", return_lines=True, quiet=True)
+            if not which_results:
+                return
+            self.path = Path(which_results[0])
         else:
             self.path = Path(f"/Applications/{name}.app")
         self.pkill = pkill
@@ -51,12 +54,13 @@ class App:
     def on(self):
         """Open the app."""
         func = print if self.dry_run else shell
+        back = " &" if self.background else ""
+
         if self.open_commands:
             for command in self.open_commands:
-                func(command)
+                func(f"{command}{back}")
             return
         if self.cli:
-            back = " &" if self.background else ""
             func(f"'{self.path}'{back}")
         else:
             func(f"open '{self.path}'")
@@ -157,7 +161,13 @@ Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-DontForget = App("dontforget", cli=True, background=True, kill_commands=[ps_aux_kill("dontforget")])
+DontForget = App(
+    "dontforget",
+    cli=True,
+    open_commands=["dontforget menu"],
+    background=True,
+    kill_commands=[ps_aux_kill("dontforget")],
+)
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
