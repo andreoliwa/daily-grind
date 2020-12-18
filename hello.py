@@ -32,12 +32,12 @@ class App:
     ) -> None:
         self.name = name
         self.cli = cli
+        self.path = None
         if cli:
             which_results = shell(f"which {name}", return_lines=True, quiet=True)
-            if not which_results:
-                return
-            self.path = Path(which_results[0])
-        else:
+            if which_results:
+                self.path = Path(which_results[0])
+        if not self.path:
             self.path = Path(f"/Applications/{name}.app")
         self.pkill = pkill
         self.open_commands = open_commands or []
