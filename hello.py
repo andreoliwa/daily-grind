@@ -182,6 +182,8 @@ Todoist = App("Todoist")
 Bitwarden = App("Bitwarden")
 VLC = App("VLC")
 XQuartz = App("XQuartz", kill_commands=["pkill -9 launchd_startx"])
+BeFocused = App("Be Focused")
+Lightshot = App("Lightshot Screenshot")
 
 
 GROUPS = {
@@ -211,7 +213,9 @@ GROUPS = {
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
     "sennder": Action(
-        "Sennder apps", turn_on, [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp]
+        "Sennder apps",
+        turn_on,
+        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp, BeFocused, Lightshot],
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
