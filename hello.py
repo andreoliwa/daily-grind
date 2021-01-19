@@ -246,29 +246,32 @@ def main(dry_run: bool, show_list: bool, off: bool, group_or_app: Tuple[str]) ->
     # This way, an app won't be off/on/off/on multiple times... last action is "on".
     app_mapping: Dict[App, ActionFunction] = {}
     for query in group_or_app:
-        chosen_app = ""
-        chosen_group = fzf(GROUPS.keys(), query=query)
-        if not chosen_group:
-            chosen_app = fzf(App.ALL_NAMES.keys(), query=query)
+        chosen = fzf(list(GROUPS.keys()) + list(App.ALL_NAMES.keys()), query=query)
+        if not chosen:
+            continue
 
-        if chosen_group:
-            action = GROUPS[chosen_group]
+        if chosen in GROUPS:
+            action = GROUPS[chosen]
             desired_function = turn_off if off else action.function
-            success(f"Group: {chosen_group} / Action: {desired_function}")
+            success(f"Group: {chosen} / Action: {desired_function.__name__}")
             names = []
-            for app in get_recursive_apps(chosen_group):
+            for app in get_recursive_apps(chosen):
                 app_mapping[app] = desired_function
                 names.append(app.name)
             click.echo("  " + ", ".join(names))
-        elif chosen_app:
+
+        elif chosen in App.ALL_NAMES:
             # If an app was informed, we assume it should be open
-            app = App.ALL_NAMES[chosen_app]
+            app = App.ALL_NAMES[chosen]
             app_mapping[app] = turn_off if off else turn_on
 
     # Group by function again
     function_mapping: Dict[ActionFunction, List[App]] = defaultdict(list)
     for app, func in app_mapping.items():
         function_mapping[func].append(app)
+
+    if not function_mapping:
+        raise click.ClickException("Choose an app or group")
 
     success("Executing the actions")
     for func, list_apps in function_mapping.items():
