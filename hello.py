@@ -209,7 +209,7 @@ GROUPS = {
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
-    "dev": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
+    "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
     "sennder": Action(
@@ -219,6 +219,11 @@ GROUPS = {
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
+    ),
+    "pod-demo": Action(
+        "Pod demo in the bi-weekly BA Review",
+        turn_on,
+        [Bluetooth, Finicky, Hammerspoon, BraveBrowser, KeepingYouAwake, VisualStudioCode, Zoom],
     ),
 }
 
