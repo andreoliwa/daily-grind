@@ -209,6 +209,7 @@ GROUPS = {
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
+    "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, Todoist, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
