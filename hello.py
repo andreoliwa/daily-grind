@@ -31,6 +31,7 @@ class App:
         collection_key: str = None,
     ) -> None:
         self.name = name
+        self._full_name = f"{name}.app"
         self.cli = cli
         self.path = None
         if cli:
@@ -38,7 +39,7 @@ class App:
             if which_results:
                 self.path = Path(which_results[0])
         if not self.path:
-            self.path = Path(f"/Applications/{name}.app")
+            self.path = Path(f"/Applications/{self._full_name}")
         self.pkill = pkill
         self.open_commands = open_commands or []
         self.kill_commands = kill_commands or []
@@ -49,7 +50,7 @@ class App:
 
     def __repr__(self):
         """String representation."""
-        return f"<App {self.name}>"
+        return f"<App {self._full_name}>"
 
     def on(self):
         """Open the app."""
@@ -72,7 +73,7 @@ class App:
             for command in self.kill_commands:
                 func(command)
         else:
-            func(f"pkill '{self.pkill or self.name}'")
+            func(f"pkill '{self.pkill or self._full_name}'")
 
 
 class Script(App):
