@@ -73,7 +73,7 @@ class App:
             for command in self.kill_commands:
                 func(command)
         else:
-            func(f"pkill '{self.pkill or self._full_name}'")
+            func(f"pkill '{self.pkill or self.name}'")
 
 
 class Script(App):
