@@ -184,7 +184,7 @@ Bitwarden = App("Bitwarden")
 VLC = App("VLC")
 XQuartz = App("XQuartz", kill_commands=["pkill -9 launchd_startx"])
 BeFocused = App("Be Focused")
-Lightshot = App("Lightshot Screenshot")
+Flameshot = App("flameshot")
 
 
 GROUPS = {
@@ -217,7 +217,7 @@ GROUPS = {
     "sennder": Action(
         "Sennder apps",
         turn_on,
-        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp, BeFocused, Lightshot],
+        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp, BeFocused, Flameshot],
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
