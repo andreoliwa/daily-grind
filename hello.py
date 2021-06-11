@@ -178,7 +178,7 @@ Hammerspoon = App("Hammerspoon")
 Bluetooth = App(
     "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
 )
-Pritunl = App("Pritunl", kill_commands=[ps_aux_kill("pritunl", exclude=["pritunl-service"], sudo=True)])
+AwsVpnClient = App("AWS VPN Client")
 Todoist = App("Todoist")
 Bitwarden = App("Bitwarden")
 VLC = App("VLC")
