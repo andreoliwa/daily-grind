@@ -185,6 +185,7 @@ VLC = App("VLC")
 XQuartz = App("XQuartz", kill_commands=["pkill -9 launchd_startx"])
 BeFocused = App("Be Focused")
 Flameshot = App("flameshot")
+DeepL = App("DeepL")
 
 
 GROUPS = {
@@ -195,18 +196,7 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        [
-            Bluetooth,
-            OneDrive,
-            Finicky,
-            KeepingYouAwake,
-            Todoist,
-            RescueTime,
-            TogglTrack,
-            Hammerspoon,
-            Docker,
-            DontForget,
-        ],
+        ["minimal", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
@@ -227,6 +217,8 @@ GROUPS = {
         turn_on,
         [Bluetooth, Finicky, Hammerspoon, BraveBrowser, KeepingYouAwake, VisualStudioCode, Zoom],
     ),
+    "chat": Action("Open all chat apps (plus DeepL to translate stuff)", turn_on, [Signal, Telegram, WhatsApp, DeepL]),
+    "conference": Action("Open all video conference apps", turn_on, [Zoom, Skype]),
 }
 
 
