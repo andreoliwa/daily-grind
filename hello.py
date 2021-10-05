@@ -186,6 +186,7 @@ XQuartz = App("XQuartz", kill_commands=["pkill -9 launchd_startx"])
 BeFocused = App("Be Focused")
 Flameshot = App("flameshot")
 DeepL = App("DeepL")
+AppPolice = App("AppPolice")
 
 
 GROUPS = {
@@ -196,9 +197,10 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        ["minimal", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
+        ["minimal", "sync", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
     ),
-    "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, OneDrive, Hammerspoon]),
+    "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
+    "sync": Action("Sync apps", turn_on, [OneDrive, AppPolice]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, Todoist, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
