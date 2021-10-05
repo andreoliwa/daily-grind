@@ -161,7 +161,7 @@ ScanSnapHome = App("ScanSnapHomeMain", kill_commands=[ps_aux_kill("scansnap")])
 
 Finicky = App("Finicky")
 Docker = App("Docker")
-OneDrive = App("OneDrive", kill_commands=[ps_aux_kill("OneDrive.+FinderSync", force=True)])
+OneDrive = App("OneDrive", kill_commands=["pkill OneDrive", ps_aux_kill("OneDrive.+FinderSync", force=True)])
 Dropbox = App("Dropbox")
 DontForget = App(
     "dontforget",
