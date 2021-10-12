@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from os import path
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Set, Tuple, Union
 
@@ -29,11 +30,12 @@ class App:
         cli=False,
         background=False,
         collection_key: str = None,
+        path: str = None,
     ) -> None:
         self.name = name
         self._full_name = f"{name}.app"
         self.cli = cli
-        self.path = None
+        self.path = path
         if cli:
             which_results = shell(f"which {name}", return_lines=True, quiet=True)
             if which_results:
@@ -188,6 +190,7 @@ BeFocused = App("Be Focused")
 Flameshot = App("flameshot")
 DeepL = App("DeepL")
 AppPolice = App("AppPolice")
+ExtensionsPane = App("Extensions.prefPane", path="/System/Library/PreferencePanes/Extensions.prefPane")
 
 
 GROUPS = {
@@ -201,7 +204,7 @@ GROUPS = {
         ["minimal", "sync", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
-    "sync": Action("Sync apps", turn_on, [OneDrive, AppPolice]),
+    "sync": Action("Sync apps", turn_on, [OneDrive, AppPolice, ExtensionsPane]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, Todoist, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
