@@ -191,6 +191,7 @@ Flameshot = App("flameshot")
 DeepL = App("DeepL")
 AppPolice = App("AppPolice")
 ExtensionsPane = App("Extensions.prefPane", path="/System/Library/PreferencePanes/Extensions.prefPane")
+ActivityMonitor = App("Activity Monitor", path="/System/Applications/Utilities/Activity Monitor.app")
 
 
 GROUPS = {
@@ -204,7 +205,7 @@ GROUPS = {
         ["minimal", "sync", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
-    "sync": Action("Sync apps", turn_on, [OneDrive, AppPolice, ExtensionsPane]),
+    "sync": Action("Sync apps", turn_on, [OneDrive, AppPolice, ExtensionsPane, ActivityMonitor]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, Todoist, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
