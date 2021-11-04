@@ -202,19 +202,20 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        ["minimal", "sync", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
+        # TODO: add back DontForget when credentials are there
+        ["minimal", "sync", KeepingYouAwake, RescueTime, TogglTrack, Docker, DeepL],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
-    "sync": Action("Sync apps", turn_on, [OneDrive, AppPolice, ExtensionsPane, ActivityMonitor]),
+    "sync": Action("Sync apps", turn_on, [OneDrive, ExtensionsPane, ActivityMonitor]),
     "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
-    "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, Todoist, VisualStudioCode, PyCharm]),
+    "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
     "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
-    "sennder": Action(
-        "Sennder apps",
+    "work": Action(
+        "Work apps",
         turn_on,
-        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp, BeFocused, Flameshot],
+        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp, Flameshot],
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
