@@ -181,7 +181,7 @@ Hammerspoon = App("Hammerspoon")
 Bluetooth = App(
     "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
 )
-AwsVpnClient = App("AWS VPN Client")
+Tunnelblick = App("Tunnelblick")
 Todoist = App("Todoist")
 Bitwarden = App("Bitwarden")
 VLC = App("VLC")
@@ -215,7 +215,7 @@ GROUPS = {
     "work": Action(
         "Work apps",
         turn_on,
-        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, Signal, WhatsApp, Flameshot],
+        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, "chat", Flameshot, Tunnelblick],
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
