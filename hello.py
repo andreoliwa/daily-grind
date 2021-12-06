@@ -203,7 +203,7 @@ GROUPS = {
         "Background apps",
         turn_on,
         # TODO: add back DontForget when credentials are there
-        ["minimal", "sync", KeepingYouAwake, RescueTime, TogglTrack, Docker, DeepL],
+        ["minimal", "sync", KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DeepL],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
     "sync": Action("Sync apps", turn_on, [OneDrive, ExtensionsPane, ActivityMonitor]),
