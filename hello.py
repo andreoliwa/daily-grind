@@ -202,7 +202,7 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        ["minimal", OneDrive, KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, DeepL],
+        ["minimal", OneDrive, KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
     "sync": Action("Sync apps", turn_on, [OneDrive, ExtensionsPane, ActivityMonitor]),
@@ -214,7 +214,7 @@ GROUPS = {
     "work": Action(
         "Work apps",
         turn_on,
-        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Telegram, WhatsApp, Flameshot, Tunnelblick],
+        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Signal, Telegram, WhatsApp, Flameshot, Tunnelblick],
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
