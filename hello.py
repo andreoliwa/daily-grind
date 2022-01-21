@@ -192,6 +192,7 @@ DeepL = App("DeepL")
 AppPolice = App("AppPolice")
 ExtensionsPane = App("Extensions.prefPane", path="/System/Library/PreferencePanes/Extensions.prefPane")
 ActivityMonitor = App("Activity Monitor", path="/System/Applications/Utilities/Activity Monitor.app")
+Toolbox = App("JetBrains Toolbox", pkill="jetbrains-toolbox")
 
 
 GROUPS = {
@@ -214,7 +215,19 @@ GROUPS = {
     "work": Action(
         "Work apps",
         turn_on,
-        [Finicky, BraveBrowser, VisualStudioCode, Slack, PyCharm, Signal, Telegram, WhatsApp, Flameshot, Tunnelblick],
+        [
+            Finicky,
+            BraveBrowser,
+            VisualStudioCode,
+            Slack,
+            PyCharm,
+            Signal,
+            Telegram,
+            WhatsApp,
+            Flameshot,
+            Tunnelblick,
+            Toolbox,
+        ],
     ),
     "famiglia": Action(
         "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
