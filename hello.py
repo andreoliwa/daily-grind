@@ -182,6 +182,7 @@ Bluetooth = App(
     "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
 )
 Tunnelblick = App("Tunnelblick")
+CloudflareWARP = App("Cloudflare WARP")
 Todoist = App("Todoist")
 Bitwarden = App("Bitwarden")
 VLC = App("VLC")
@@ -226,7 +227,7 @@ GROUPS = {
             Telegram,
             WhatsApp,
             Flameshot,
-            Tunnelblick,
+            CloudflareWARP,
             Toolbox,
         ],
     ),
