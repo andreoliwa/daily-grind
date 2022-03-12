@@ -195,6 +195,7 @@ ExtensionsPane = App("Extensions.prefPane", path="/System/Library/PreferencePane
 ActivityMonitor = App("Activity Monitor", path="/System/Applications/Utilities/Activity Monitor.app")
 Toolbox = App("JetBrains Toolbox", pkill="jetbrains-toolbox")
 Postman = App("Postman")
+Gnucash = App("Gnucash")
 
 
 GROUPS = {
@@ -213,7 +214,7 @@ GROUPS = {
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
-    "psychotherapy": Action("Therapy", turn_on, [KeepingYouAwake, Signal, VisualStudioCode, "web"]),
+    "psychotherapy": Action("Therapy", turn_on, ["minimal", KeepingYouAwake, Zoom, Gnucash]),
     "work": Action(
         "Work apps",
         turn_on,
