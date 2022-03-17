@@ -223,7 +223,6 @@ GROUPS = {
             BraveBrowser,
             VisualStudioCode,
             Slack,
-            PyCharm,
             Signal,
             Telegram,
             WhatsApp,
