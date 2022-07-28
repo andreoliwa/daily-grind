@@ -152,7 +152,7 @@ Signal = App("Signal", kill_commands=["sleep .5", "pkill Signal"] * 2)
 
 VisualStudioCode = App("Visual Studio Code", pkill="Electron")
 BraveBrowser = App("Brave Browser")
-BraveBrowserDev = App("Brave Browser Dev")
+BraveBrowserBeta = App("Brave Browser Beta")
 Skype = App("Skype")
 TogglTrack = App("Toggl Track")
 PyCharm = App("PyCharm", pkill="pycharm")
@@ -196,6 +196,8 @@ ActivityMonitor = App("Activity Monitor", path="/System/Applications/Utilities/A
 Toolbox = App("JetBrains Toolbox", pkill="jetbrains-toolbox")
 Postman = App("Postman")
 Gnucash = App("Gnucash")
+LogitechGHub = App("lghub")
+DymoPrintingHost = App("DYMO.DLS.Printing.Host")
 
 
 GROUPS = {
@@ -210,7 +212,7 @@ GROUPS = {
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
     "sync": Action("Sync apps", turn_on, [OneDrive, ExtensionsPane, ActivityMonitor]),
-    "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserDev]),
+    "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserBeta]),
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
