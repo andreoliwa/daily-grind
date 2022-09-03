@@ -199,6 +199,7 @@ Gnucash = App("Gnucash")
 LogitechGHub = App("lghub")
 DymoPrintingHost = App("DYMO.DLS.Printing.Host")
 SimpleFloatingClock = App("SimpleFloatingClock")
+Logseq = App("Logseq")
 
 
 GROUPS = {
@@ -209,7 +210,7 @@ GROUPS = {
     "background": Action(
         "Background apps",
         turn_on,
-        ["minimal", OneDrive, KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, Bitwarden],
+        ["minimal", OneDrive, KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, Bitwarden, Logseq],
     ),
     "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
     "sync": Action("Sync apps", turn_on, [OneDrive, ExtensionsPane, ActivityMonitor]),
@@ -217,7 +218,9 @@ GROUPS = {
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
-    "psychotherapy": Action("Therapy", turn_on, ["minimal", KeepingYouAwake, Skype, Gnucash, SimpleFloatingClock]),
+    "psychotherapy": Action(
+        "Therapy", turn_on, ["minimal", KeepingYouAwake, Skype, Gnucash, SimpleFloatingClock, Logseq]
+    ),
     "work": Action(
         "Work apps",
         turn_on,
