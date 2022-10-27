@@ -163,7 +163,14 @@ ScanSnapHome = App("ScanSnapHomeMain", kill_commands=[ps_aux_kill("scansnap")])
 
 Finicky = App("Finicky")
 Docker = App("Docker")
-OneDrive = App("OneDrive", kill_commands=["pkill OneDrive", ps_aux_kill("OneDrive.+FinderSync", force=True)])
+OneDrive = App(
+    "OneDrive",
+    # TODO for now, don't force kill OneDrive because it might lead to sync errors
+    kill_commands=[
+        "echo Quit OneDrive manually to avoid sync errors # pkill OneDrive",
+        # ps_aux_kill("OneDrive.+FinderSync", force=True)
+    ],
+)
 Dropbox = App("Dropbox")
 DontForget = App(
     "dontforget",
