@@ -2,14 +2,23 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from os import path
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Set, Tuple, Union
+from typing import Callable
+from typing import Dict
+from typing import Iterable
+from typing import List
+from typing import NamedTuple
+from typing import Optional
+from typing import Set
+from typing import Tuple
+from typing import Union
 
 import click
 from clib import dry_run_option
-from clib.files import fzf, shell
-from clib.ui import failure, success
+from clib.files import fzf
+from clib.files import shell
+from clib.ui import failure
+from clib.ui import success
 
 
 class App:
@@ -185,9 +194,7 @@ BeardedSpice = App("BeardedSpice")
 PrivateInternetAccess = App("Private Internet Access")
 Slack = App("Slack")
 Hammerspoon = App("Hammerspoon")
-Bluetooth = App(
-    "blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch"
-)
+Bluetooth = App("blueutil", cli=True, open_commands=["blueutil -p 1"], kill_commands=["blueutil -p 0"], collection_key="switch")
 Tunnelblick = App("Tunnelblick")
 CloudflareWARP = App("Cloudflare WARP", kill_commands=["warp-cli disconnect", "pkill 'Cloudflare WARP'"])
 Todoist = App("Todoist")
@@ -211,9 +218,7 @@ Logseq = App("Logseq")
 
 GROUPS = {
     "off": Action("Turn off all apps and go to sleep", turn_off, App.collection[None]),
-    "switch": Action(
-        "Turn off all apps before switching laptops", turn_off, App.collection[None] | App.collection["switch"]
-    ),
+    "switch": Action("Turn off all apps before switching laptops", turn_off, App.collection[None] | App.collection["switch"]),
     "background": Action(
         "Background apps",
         turn_on,
@@ -225,9 +230,7 @@ GROUPS = {
     "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, VisualStudioCode, PyCharm]),
     "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
     "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
-    "psychotherapy": Action(
-        "Therapy", turn_on, ["minimal", KeepingYouAwake, Skype, Gnucash, SimpleFloatingClock, Logseq]
-    ),
+    "psychotherapy": Action("Therapy", turn_on, ["minimal", KeepingYouAwake, Skype, Gnucash, SimpleFloatingClock, Logseq]),
     "work": Action(
         "Work apps",
         turn_on,
@@ -244,9 +247,7 @@ GROUPS = {
             Toolbox,
         ],
     ),
-    "famiglia": Action(
-        "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
-    ),
+    "famiglia": Action("Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]),
     "pod-demo": Action(
         "Pod demo in the bi-weekly BA Review",
         turn_on,
