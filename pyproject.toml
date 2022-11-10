@@ -1,10 +1,47 @@
-[build-system]
-requires = [
-    "setuptools>=30.3.0",
-    "wheel",
+[tool.black]
+line-length = 120
+target-version = ["py39"]
+
+[tool.poetry]
+name = "daily-grind"
+version = "0.1.0"
+description = "Easily open all the apps you use every day"
+authors = ["W. Augusto Andreoli <andreoliwa@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/andreoliwa/daily-grind"
+classifiers = [
+    # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Unix",
+    "Operating System :: POSIX",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Utilities",
 ]
 
-[tool.black]
-line-length = 140
-target-version = ['py37']
-skip-string-normalization = true
+[tool.poetry.scripts]
+dg = "daily_grind.cli:main"
+
+[tool.poetry.urls]
+"Changelog" = "https://github.com/andreoliwa/daily-grind/blob/master/CHANGELOG.rst"
+"Issue Tracker" = "https://github.com/andreoliwa/daily-grind/issues"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "*"
+clib = { git = "https://github.com/andreoliwa/python-clib.git" }
+#clib = {path = "../python-clib"}
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
