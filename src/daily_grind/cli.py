@@ -25,7 +25,11 @@ from clib.files import fzf
 from clib.ui import success
 
 from daily_grind import ActionFunction, App, get_recursive_apps, turn_off, turn_on
-from daily_grind.config import GROUPS
+from daily_grind.config import settings
+
+
+def function_from_str(function_name: str):
+    return turn_on if "on" in function_name else turn_off
 
 
 @click.command()
@@ -39,9 +43,9 @@ def main(dry_run: bool, show_list: bool, off: bool, group_or_app: Tuple[str]) ->
 
     if show_list or not group_or_app:
         success("Groups:")
-        max_len = max(len(key) for key in GROUPS)
-        for key, action in GROUPS.items():
-            click.echo(f"{key:{max_len}}  {action.description}")
+        max_len = max(len(key) for key in settings.groups.keys())
+        for key, box in settings.groups.items():
+            click.echo(f"{key:{max_len}}  {box.description}")
 
         success("Apps:")
         click.echo("  " + ", ".join(sorted(App.ALL_NAMES.keys())))
@@ -51,13 +55,13 @@ def main(dry_run: bool, show_list: bool, off: bool, group_or_app: Tuple[str]) ->
     # This way, an app won't be off/on/off/on multiple times... last action is "on".
     app_mapping: Dict[App, ActionFunction] = {}
     for query in group_or_app:
-        chosen = fzf(list(GROUPS.keys()) + list(App.ALL_NAMES.keys()), query=query)
+        chosen = fzf(list(settings.groups.keys()) + list(App.ALL_NAMES.keys()), query=query)
         if not chosen:
             continue
 
-        if chosen in GROUPS:
-            action = GROUPS[chosen]
-            desired_function = turn_off if off else action.function
+        if chosen in settings.groups.keys():
+            box = settings.groups[chosen]
+            desired_function = turn_off if off else function_from_str(box.function)
             success(f"Group: {chosen} / Action: {desired_function.__name__}")
             names = []
             for app in get_recursive_apps(chosen):

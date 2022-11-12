@@ -57,7 +57,7 @@ version = "0.10.0"
 description = "Python CLI library, tools and scripts to help in everyday life"
 category = "main"
 optional = false
-python-versions = "^3.7"
+python-versions = "^3.9"
 develop = false
 
 [package.dependencies]
@@ -80,7 +80,7 @@ macos = ["postal"]
 type = "git"
 url = "https://github.com/andreoliwa/python-clib.git"
 reference = "HEAD"
-resolved_reference = "e31ba1ec3f80026ae3c8e9bb5226940e4f0e43e0"
+resolved_reference = "748f8097788f44b09530832d273c4902c4a84dd4"
 
 [[package]]
 name = "click"
@@ -122,6 +122,24 @@ description = "cssselect parses CSS3 Selectors and translates them to XPath 1.0"
 category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "dynaconf"
+version = "3.1.11"
+description = "The dynamic configurator for your Python Project"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+all = ["configobj", "hvac", "redis", "ruamel.yaml"]
+configobj = ["configobj"]
+ini = ["configobj"]
+redis = ["redis"]
+test = ["codecov", "configobj", "django", "flake8", "flake8-debugger", "flake8-print", "flake8-todo", "flask (>=0.12)", "hvac", "pep8-naming", "pytest", "pytest-cov", "pytest-mock", "pytest-xdist", "python-dotenv", "radon", "redis", "toml"]
+toml = ["toml"]
+vault = ["hvac"]
+yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "fake-useragent"
@@ -445,7 +463,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "8988f0cd2e8d17a3a62bcd5ef0a12d70fd0a5a77432a2c206abe9828dce2f193"
+content-hash = "f4634c7b84f301daacca46780a60a2f5717c5ea804bcd4ca0e2a7e2680502502"
 
 [metadata.files]
 appdirs = [
@@ -483,6 +501,10 @@ colorlog = [
 cssselect = [
     {file = "cssselect-1.2.0-py2.py3-none-any.whl", hash = "sha256:da1885f0c10b60c03ed5eccbb6b68d6eff248d91976fcde348f395d54c9fd35e"},
     {file = "cssselect-1.2.0.tar.gz", hash = "sha256:666b19839cfaddb9ce9d36bfe4c969132c647b92fc9088c4e23f786b30f1b3dc"},
+]
+dynaconf = [
+    {file = "dynaconf-3.1.11-py2.py3-none-any.whl", hash = "sha256:87e0b3b12b5db9e8fb465e1f8c7fdb926cd2ec5b6d88aa7f821f316df93fb165"},
+    {file = "dynaconf-3.1.11.tar.gz", hash = "sha256:d9cfb50fd4a71a543fd23845d4f585b620b6ff6d9d3cc1825c614f7b2097cb39"},
 ]
 fake-useragent = [
     {file = "fake-useragent-0.1.14.tar.gz", hash = "sha256:470c509fc645a4fb2799a6cdf35982c3d27e57af04f601b3f37ac0b5e46c0cc7"},

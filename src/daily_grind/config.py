@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from daily_grind import Action, App, ps_aux_kill, turn_off, turn_on
+from pathlib import Path
+
+from dynaconf import Dynaconf
+
+from daily_grind import App, ps_aux_kill
+from daily_grind.constants import CONFIG_DIR, PROJECT_NAME_SHORT, SETTINGS_TOML
 
 Spotify = App("Spotify")
 SpotifyNowPlaying = App("Spotify - now playing")
@@ -19,7 +24,7 @@ Finicky = App("Finicky")
 Docker = App("Docker")
 OneDrive = App(
     "OneDrive",
-    # TODO for now, don't force kill OneDrive because it might lead to sync errors
+    # TODO: fix: don't force kill OneDrive because it might lead to sync errors
     kill_commands=[
         "echo Quit OneDrive manually to avoid sync errors # pkill OneDrive",
         # ps_aux_kill("OneDrive.+FinderSync", force=True)
@@ -62,49 +67,7 @@ DymoPrintingHost = App("DYMO.DLS.Printing.Host")
 SimpleFloatingClock = App("SimpleFloatingClock")
 Logseq = App("Logseq")
 
-GROUPS = {
-    "off": Action("Turn off all apps and go to sleep", turn_off, App.collection[None]),
-    "switch": Action(
-        "Turn off all apps before switching laptops", turn_off, App.collection[None] | App.collection["switch"]
-    ),
-    "background": Action(
-        "Background apps",
-        turn_on,
-        ["minimal", OneDrive, KeepingYouAwake, Todoist, RescueTime, TogglTrack, Docker, DontForget, Bitwarden, Logseq],
-    ),
-    "minimal": Action("Minimalistic apps", turn_on, [Bluetooth, Finicky, Hammerspoon]),
-    "sync": Action("Sync apps", turn_on, [OneDrive, ExtensionsPane, ActivityMonitor]),
-    "web": Action("Browse the web", turn_on, [Finicky, BraveBrowserBeta]),
-    "nitpick": Action("Nitpick", turn_on, [Hammerspoon, "web", TogglTrack, VisualStudioCode, PyCharm]),
-    "development": Action("Development", turn_on, [TogglTrack, Docker, "web", VisualStudioCode, PyCharm]),
-    "music": Action("Listen to music", turn_on, [Spotify, SpotifyNowPlaying, BeardedSpice]),
-    "psychotherapy": Action(
-        "Therapy", turn_on, ["minimal", KeepingYouAwake, Skype, Gnucash, SimpleFloatingClock, Logseq]
-    ),
-    "work": Action(
-        "Work apps",
-        turn_on,
-        [
-            Finicky,
-            BraveBrowser,
-            VisualStudioCode,
-            Slack,
-            Signal,
-            Telegram,
-            WhatsApp,
-            Flameshot,
-            CloudflareWARP,
-            Toolbox,
-        ],
-    ),
-    "famiglia": Action(
-        "Video call with the family", turn_on, ["minimal", "web", KeepingYouAwake, TogglTrack, Skype, WhatsApp]
-    ),
-    "pod-demo": Action(
-        "Pod demo in the bi-weekly BA Review",
-        turn_on,
-        [Bluetooth, Finicky, Hammerspoon, BraveBrowser, KeepingYouAwake, VisualStudioCode, Zoom],
-    ),
-    "chat": Action("Open all chat apps (plus DeepL to translate stuff)", turn_on, [Signal, Telegram, WhatsApp, DeepL]),
-    "conference": Action("Open all video conference apps", turn_on, [Zoom, Skype]),
-}
+settings = Dynaconf(
+    envvar_prefix=PROJECT_NAME_SHORT.upper(),
+    settings_files=[SETTINGS_TOML, Path(CONFIG_DIR) / SETTINGS_TOML],
+)

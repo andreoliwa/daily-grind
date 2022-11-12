@@ -6,6 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Set, Union
 
+import click
 from clib.files import shell
 from clib.ui import failure
 
@@ -27,7 +28,7 @@ class App:
         kill_commands: List[str] = None,
         cli=False,
         background=False,
-        collection_key: str = None,
+        collection_key: str = None,  # TODO: refactor: remove unused collection_key
         path: str = None,
     ) -> None:
         self.name = name
@@ -108,23 +109,32 @@ def get_recursive_apps(group: str, seen: Set = None) -> List[App]:
     if seen is None:
         seen = set()
 
-    from daily_grind.config import GROUPS
+    from daily_grind.config import settings
 
-    action = GROUPS.get(group)
-    if not action:
+    box = settings.groups.get(group)
+    if not box:
         failure(f"Group does not exist: {group}")
         return []
 
-    found_apps = []
-    for app in action.apps:
-        if app in seen:
-            continue
-        seen.add(app)
+    # Use all apps if the "apps" keys is empty on the TOML file
+    apps_in_group = box.apps
+    if not apps_in_group:
+        return list(App.collection[None])
 
-        if isinstance(app, str):
-            found_apps.extend(get_recursive_apps(app, seen))
+    found_apps: List[App] = []
+    for app_name in apps_in_group:
+        if app_name in seen:
+            continue
+        seen.add(app_name)
+
+        if app_name.startswith("groups."):
+            found_apps.extend(get_recursive_apps(app_name, seen))
         else:
-            found_apps.append(app)
+            app = App.ALL_NAMES.get(app_name)
+            if app:
+                found_apps.append(app)
+            else:
+                click.secho(f"App {app_name} not found!", fg="red")
     return found_apps
 
 
