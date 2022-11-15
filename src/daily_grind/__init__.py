@@ -10,6 +10,8 @@ import click
 from clib.files import shell
 from clib.ui import failure
 
+GROUPS_PREFIX = "groups."
+
 
 class App:
     """A desktop application or a command-line script."""
@@ -46,7 +48,7 @@ class App:
         self.kill_commands = kill_commands or []
         self.background = background
 
-        self.ALL_NAMES[name] = self
+        self.ALL_NAMES[clean_name(name)] = self
         self.collection[collection_key].add(self)
 
     def __repr__(self):
@@ -75,6 +77,10 @@ class App:
                 func(command)
         else:
             func(f"pkill '{self.pkill or self.name}'")
+
+
+def clean_name(name: str) -> str:
+    return name.strip().replace(" ", "").lower()
 
 
 class Script(App):
@@ -127,10 +133,10 @@ def get_recursive_apps(group: str, seen: Set = None) -> List[App]:
             continue
         seen.add(app_name)
 
-        if app_name.startswith("groups."):
-            found_apps.extend(get_recursive_apps(app_name, seen))
+        if app_name.startswith(GROUPS_PREFIX):
+            found_apps.extend(get_recursive_apps(app_name.replace(GROUPS_PREFIX, ""), seen))
         else:
-            app = App.ALL_NAMES.get(app_name)
+            app = App.ALL_NAMES.get(clean_name(app_name))
             if app:
                 found_apps.append(app)
             else:
