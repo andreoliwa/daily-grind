@@ -1,4 +1,4 @@
-# TODO: fix tests first
+# TODO: fix tests first, then move back to .github/workflows directory
 #name: build
 #on: [push, pull_request]
 #jobs:
