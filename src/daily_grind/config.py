@@ -17,7 +17,7 @@ BraveBrowser = App("Brave Browser")
 BraveBrowserBeta = App("Brave Browser Beta")
 Skype = App("Skype")
 TogglTrack = App("Toggl Track")
-PyCharm = App("PyCharm", pkill="pycharm")
+PyCharm = App("PyCharm", pkill="pycharm", path="~/Applications/JetBrains Toolbox/PyCharm Professional.app")
 Zoom = App("zoom.us")
 ScanSnapHome = App("ScanSnapHomeMain", kill_commands=[ps_aux_kill("scansnap")])  # Has some background processes
 Finicky = App("Finicky")

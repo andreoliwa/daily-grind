@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Easily open all the apps you use every day"
 authors = ["W. Augusto Andreoli <andreoliwa@gmail.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "README.rst"
 repository = "https://github.com/andreoliwa/daily-grind"
 classifiers = [
     # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -37,11 +37,9 @@ dg = "daily_grind.cli:main"
 [tool.poetry.dependencies]
 python = "^3.9"
 click = "*"
-# TODO: build: replace clib by invoke (or remove it completely)
-clib = { git = "https://github.com/andreoliwa/python-clib.git" }
-#clib = {path = "../python-clib"}
 dynaconf = "*"
 appdirs = "*"
+invoke = "*"
 
 [tool.poetry.group.dev.dependencies]
 

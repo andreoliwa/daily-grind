@@ -2,15 +2,21 @@ from __future__ import annotations
 
 __version__ = "0.0.0"
 
+import os
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Callable, Dict, Iterable, List, NamedTuple, Optional, Set, Union
 
 import click
-from clib.files import shell
-from clib.ui import failure
+from invoke import Config, Context, Result
 
 GROUPS_PREFIX = "groups."
+
+# Reuse "echo" from the global Invoke config,
+# but not "pty", because it doesn't work with background processes.
+config_dict = {"run": {"echo": bool(os.environ.get("INVOKE_RUN_ECHO", False))}}
+CONTEXT = Context(Config(config_dict))
 
 
 class App:
@@ -36,9 +42,9 @@ class App:
         self.name = name
         self._full_name = f"{name}.app"
         self.cli = cli
-        self.path = path
+        self.path = Path(path).expanduser() if path else None
         if cli:
-            which_results = shell(f"which {name}", return_lines=True, quiet=True)
+            which_results = CONTEXT.run(f"which {name}", hide=True).stdout.splitlines()
             if which_results:
                 self.path = Path(which_results[0])
         if not self.path:
@@ -57,26 +63,36 @@ class App:
 
     def on(self):
         """Open the app."""
-        func = print if self.dry_run else shell
-        back = " &" if self.background else ""
+        back = ""
+        kwargs = {}
+        if self.background:
+            back = " &"
+            kwargs["asynchronous"] = True
 
         if self.open_commands:
             for command in self.open_commands:
-                func(f"{command}{back}")
+                self._run(f"{command}{back}", **kwargs)
             return
+        quoted_path = f"'{self.path}'"
         if self.cli:
-            func(f"'{self.path}'{back}")
+            self._run(f"{quoted_path}{back}", **kwargs)
         else:
-            func(f"open '{self.path}'")
+            self._run(f"open {quoted_path}{back}", **kwargs)
 
     def off(self):
         """Close/kill the app."""
-        func = print if self.dry_run else shell
         if self.kill_commands:
             for command in self.kill_commands:
-                func(command)
+                self._run(command)
         else:
-            func(f"pkill '{self.pkill or self.name}'")
+            self._run(f"pkill '{self.pkill or self.name}'")
+
+    def _run(self, command: str, **kwargs) -> Result | None:
+        """Run a command."""
+        if self.dry_run:
+            print(command)
+            return None
+        return CONTEXT.run(command, **kwargs)
 
 
 def clean_name(name: str) -> str:
@@ -156,3 +172,15 @@ def ps_aux_kill(app_partial_name: str, *, exclude: List[str] = None, sudo: bool 
     if sudo:
         return f'test -n "$({list_pids})" && {list_pids} | sudo xargs kill{dash_nine}'
     return f"{list_pids} | xargs kill{dash_nine}"
+
+
+def success(message: str) -> None:
+    """Display a success message."""
+    click.secho(message, fg="bright_green")
+
+
+def failure(message: str, exit_code: int = None) -> None:
+    """Display an error message and optionally exit."""
+    click.secho(message, fg="bright_red", err=True)
+    if exit_code is not None:
+        sys.exit(exit_code)

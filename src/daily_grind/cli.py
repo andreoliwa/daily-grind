@@ -17,14 +17,11 @@ Why does this file exist, and why not put this in __main__?
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import click
-from clib import dry_run_option
-from clib.files import fzf
-from clib.ui import success
 
-from daily_grind import ActionFunction, App, get_recursive_apps, turn_off, turn_on
+from daily_grind import CONTEXT, ActionFunction, App, get_recursive_apps, success, turn_off, turn_on
 from daily_grind.config import settings
 
 
@@ -33,7 +30,9 @@ def function_from_str(function_name: str):
 
 
 @click.command()
-@dry_run_option
+@click.option(
+    "--dry-run", "-n", default=False, is_flag=True, help="Only show what would be done, without actually doing it"
+)
 @click.option("--list", "-l", "show_list", is_flag=True, default=False, help="List the available groups")
 @click.option("--off", "-x", is_flag=True, default=False, help="Turn off the apps instead of opening")
 @click.argument("group_or_app", nargs=-1, required=False)
@@ -85,3 +84,32 @@ def main(dry_run: bool, show_list: bool, off: bool, group_or_app: Tuple[str]) ->
     success("Executing the actions")
     for func, list_apps in function_mapping.items():
         func(list_apps)
+
+
+def fzf(
+    items: List[Any], *, reverse=False, query: str = None, auto_select: bool = None, exit_no_match: bool = None
+) -> Optional[str]:
+    """Run fzf to select among multiple choices."""
+    choices = "\n".join([str(item) for item in items])
+
+    query_opt = ""
+    if query:
+        query_opt = f" --query={query}"
+        # If there is a query, set auto-select flags when no explicit booleans were informed
+        if auto_select is None:
+            auto_select = True
+        if exit_no_match is None:
+            exit_no_match = True
+
+    select_one_opt = " --select-1" if auto_select else ""
+    tac_opt = " --tac" if reverse else ""
+    exit_zero_opt = " --exit-0" if exit_no_match else ""
+
+    result = CONTEXT.run(
+        f'echo "{choices}" | fzf --height 40% --reverse --inline-info '
+        f"{query_opt}{tac_opt}{select_one_opt}{exit_zero_opt} --cycle",
+        warn=True,
+        echo=False,
+        pty=False,
+    )
+    return min(result.stdout.splitlines(), default=None)
