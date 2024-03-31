@@ -92,7 +92,7 @@ class App:
         if self.dry_run:
             print(command)
             return None
-        return CONTEXT.run(command, **kwargs)
+        return CONTEXT.run(command, **kwargs, warn=True)
 
 
 def clean_name(name: str) -> str:

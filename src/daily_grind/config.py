@@ -22,14 +22,8 @@ Zoom = App("zoom.us")
 ScanSnapHome = App("ScanSnapHomeMain", kill_commands=[ps_aux_kill("scansnap")])  # Has some background processes
 Finicky = App("Finicky")
 Docker = App("Docker")
-OneDrive = App(
-    "OneDrive",
-    # TODO: fix: don't force kill OneDrive because it might lead to sync errors
-    kill_commands=[
-        "echo Quit OneDrive manually to avoid sync errors # pkill OneDrive",
-        # ps_aux_kill("OneDrive.+FinderSync", force=True)
-    ],
-)
+OrbStack = App("OrbStack")
+OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
 DontForget = App(
     "dontforget",
@@ -65,7 +59,8 @@ Gnucash = App("Gnucash")
 LogitechGHub = App("lghub")
 DymoPrintingHost = App("DYMO.DLS.Printing.Host")
 SimpleFloatingClock = App("SimpleFloatingClock")
-Logseq = App("Logseq")
+Logseq = App("Logseq", kill_commands=["pkill -9 Logseq"])
+Syncthing = App("Syncthing")
 
 settings = Dynaconf(
     envvar_prefix=PROJECT_NAME_SHORT.upper(),
