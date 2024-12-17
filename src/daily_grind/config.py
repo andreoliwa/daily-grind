@@ -44,7 +44,7 @@ Bluetooth = App(
 Tunnelblick = App("Tunnelblick")
 CloudflareWARP = App("Cloudflare WARP", kill_commands=["warp-cli disconnect", "pkill 'Cloudflare WARP'"])
 Todoist = App("Todoist")
-Bitwarden = App("Bitwarden")
+Bitwarden = App("Bitwarden", kill_commands=["pkill -9 Bitwarden"])
 VLC = App("VLC")
 XQuartz = App("XQuartz", kill_commands=["pkill -9 launchd_startx"])
 BeFocused = App("Be Focused")
@@ -61,6 +61,8 @@ DymoPrintingHost = App("DYMO.DLS.Printing.Host")
 SimpleFloatingClock = App("SimpleFloatingClock")
 Logseq = App("Logseq", kill_commands=["pkill -9 Logseq"])
 Syncthing = App("Syncthing")
+GoogleChrome = App("Google Chrome")
+Mail = App("Mail", path="/System/Applications/Mail.app")
 
 settings = Dynaconf(
     envvar_prefix=PROJECT_NAME_SHORT.upper(),
