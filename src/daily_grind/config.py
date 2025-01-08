@@ -63,6 +63,7 @@ Logseq = App("Logseq", kill_commands=["pkill -9 Logseq"])
 Syncthing = App("Syncthing")
 GoogleChrome = App("Google Chrome")
 Mail = App("Mail", path="/System/Applications/Mail.app")
+Tailscale = App("Tailscale")
 
 settings = Dynaconf(
     envvar_prefix=PROJECT_NAME_SHORT.upper(),
