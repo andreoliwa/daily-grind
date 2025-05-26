@@ -64,6 +64,8 @@ Syncthing = App("Syncthing")
 GoogleChrome = App("Google Chrome")
 Mail = App("Mail", path="/System/Applications/Mail.app")
 Tailscale = App("Tailscale")
+Messages = App("Messages", path="/System/Applications/Messages.app")
+FaceTime = App("FaceTime", path="/System/Applications/FaceTime.app")
 
 settings = Dynaconf(
     envvar_prefix=PROJECT_NAME_SHORT.upper(),
