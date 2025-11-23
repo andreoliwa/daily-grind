@@ -25,13 +25,6 @@ Docker = App("Docker")
 OrbStack = App("OrbStack")
 OneDrive = App("OneDrive")
 Dropbox = App("Dropbox")
-DontForget = App(
-    "dontforget",
-    cli=True,
-    open_commands=["dontforget menu"],
-    background=True,
-    kill_commands=[ps_aux_kill("dontforget")],
-)
 KeepingYouAwake = App("KeepingYouAwake")
 RescueTime = App("RescueTime")
 BeardedSpice = App("BeardedSpice")
